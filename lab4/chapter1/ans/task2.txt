@@ -1,0 +1,12 @@
+You can use nearly all of the familiar query operators in $match. We filter documents, retaining only those where the imdb.rating is 7 or more, genres does not include "Crime" or "Horror", the value for rated was "PG" or "G", and languages includes both "English" and "Japanese". .. code-block:
+
+var pipeline = [
+  {
+    $match: {
+      "imdb.rating": { $gte: 7 },
+      genres: { $nin: [ "Crime", "Horror" ] } ,
+      rated: { $in: ["PG", "G" ] },
+      languages: { $all: [ "English", "Japanese" ] }
+    }
+  }
+]

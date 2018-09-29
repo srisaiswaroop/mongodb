@@ -1,0 +1,16 @@
+Lab - Changing Document Shape with $project
+Remember that when using $project to be selective on which fields you pass further, the only field you must specify to remove is _id. When you specify a field to retain (title: 1), $project assumes that all other fields you haven't specified to retain should be removed.
+
+var pipeline = [
+  {
+    $match: {
+      "imdb.rating": { $gte: 7 },
+      genres: { $nin: [ "Crime", "Horror" ] } ,
+      rated: { $in: ["PG", "G" ] },
+      languages: { $all: [ "English", "Japanese" ] }
+    }
+  },
+  {
+    $project: { _id: 0, title: 1, "rated": 1 }
+  }
+]
